@@ -5,12 +5,12 @@ import (
 	"time"
 )
 
-func Roll(num, dice int64) []int64 {
+func Roll(num, dice int) []int {
 	r := rand.New(rand.NewSource(time.Now().UnixNano()))
 
-	results := make([]int64, num)
-	for i := 0; i < int(num); i++ {
-		results[i] = r.Int63n(dice) + 1
+	results := make([]int, num)
+	for i := 0; i < num; i++ {
+		results[i] = int(r.Int63n(int64(dice))) + 1
 	}
 
 	return results

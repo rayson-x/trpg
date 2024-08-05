@@ -1,5 +1,7 @@
 package dnd5e
 
+import "trpg/rules/dnd5e/damage"
+
 const (
 	TypePlayer = 1
 	TypeEnemy  = 2
@@ -22,6 +24,9 @@ type Character struct {
 	Status int
 
 	Type int
+
+	Resistance    map[damage.Type]struct{}
+	Vulnerability map[damage.Type]struct{}
 	// Skills []
 	// Conditions []Condition
 }
