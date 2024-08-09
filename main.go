@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+	"strings"
 	"trpg/rules/dnd5e"
 	"trpg/rules/dnd5e/damage"
 )
@@ -45,14 +47,24 @@ func main() {
 	// 心灵
 	dnd5e.NewDamage(damage.Psychic, 3, 8).SetFixed(0)
 
-	// &dnd5e.Character{
-	// 	Resistance: map[damage.Type]struct{}{
-	// 		damage.Force: {},
-	// 	},
-	// 	Vulnerability: map[damage.Type]struct{}{
-	// 		// damage.Force: {},
-	// 	},
-	// }
+	player := &dnd5e.Character{
+		MaxHP: 102,
+		HP:    102,
+		Resistance: map[damage.Type]struct{}{
+			damage.Force: {},
+		},
+		Vulnerability: map[damage.Type]struct{}{
+			// damage.Force: {},
+		},
+	}
+
+	player.TakingDamage([]*dnd5e.Damage{
+		dnd5e.NewDamage(damage.Slashing, 2, 6).SetFixed(5),
+		dnd5e.NewDamage(damage.Radiant, 5, 8).SetFixed(0),
+		dnd5e.NewDamage(damage.Force, 5, 10).SetFixed(0),
+	})
+
+	fmt.Println(strings.Join(player.History, "\n"))
 	// fmt.Println(
 	// 	utils.Roll(22, 8),
 	// 	dnd5e.NewDamage(damage.Force, 6, 10).SetFixed(40).
